@@ -49,7 +49,8 @@ const Form = () => {
 
         setFormDataSubmitted(formData); // Save form data for display
 
-        // You can perform further submission logic here if needed
+        //We can also use formDataSubmitted for API calls
+        
     };
 
     return (
@@ -122,7 +123,7 @@ const Form = () => {
                 </div>
             )}
 
-            {/* Display saved localStorage data */}
+            
             
             
         </div>
