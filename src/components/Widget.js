@@ -8,7 +8,7 @@ const Widget = () => {
 
             <div className='flex items-center justify-center h-[100vh]'>
                 <Link to="/form">
-                <button className='bg-yellow-500 text-black p-2 rounded-md border-2 font-semibold border-black'>Click Me</button>
+                <button className='bg-slate-500 text-black p-2 rounded-md border-2 font-semibold border-black'>Click Me</button>
                 </Link>
             </div>
         </div>
