@@ -47,9 +47,8 @@ const Form = () => {
         localStorage.setItem("Email", data.Email);
         localStorage.setItem("AudioURL", recordingURL);
 
-        setFormDataSubmitted(formData); // Save form data for display
-
-        // You can perform further submission logic here if needed
+        setFormDataSubmitted(formData); 
+        // Now we use the formDataSubmitted for api call .
     };
 
     return (
@@ -122,7 +121,7 @@ const Form = () => {
                 </div>
             )}
 
-            {/* Display saved localStorage data */}
+           
             
             
         </div>
