@@ -24,31 +24,29 @@ const Form = () => {
         setRecordingURL(recordedBlob.blobURL);
     };
 
-    
-
     const onSubmit = (data) => {
-        if(recordingURL===""){
-            alert("Please record adio pfile before submitting the form")
-            return
+        if(recordingURL === ""){
+            alert("Please record an audio file before submitting the form");
+            return;
         }
         const formData = new FormData();
         formData.append("Name", data.Name);
         formData.append("Email", data.Email);
         formData.append("AudioURL", recordingURL);
-        setRecordingURL("")
+        setRecordingURL("");
 
         // Store form data and recording URL in localStorage
         reset({
             Name: "",
             Email: "",
-            
-          });
+        });
         localStorage.setItem("Name", data.Name);
         localStorage.setItem("Email", data.Email);
         localStorage.setItem("AudioURL", recordingURL);
 
-        setFormDataSubmitted(formData); 
-        // Now we use the formDataSubmitted for api call .
+        setFormDataSubmitted(formData); // Save form data for display
+
+        // We can also use formDataSubmitted for API calls
     };
 
     return (
@@ -83,9 +81,18 @@ const Form = () => {
                         
                         <button type="button" onClick={startRecordingHandler}
                         className=' flex gap-2 items-center'>
-                                 {startRecording ? (<div className='flex gap-2 items-center'><div>Stop Recording  </div> <IoMdMicOff /></div>) : 
-                                 (<div className='flex gap-2 items-center'><div>Start Recording  </div> <FaMicrophoneAlt /></div>) }
-                            </button>
+                                 {startRecording ? (
+                                    <div className='flex gap-2 items-center'>
+                                        <div>Stop Recording</div> 
+                                        <IoMdMicOff />
+                                    </div>
+                                 ) : (
+                                    <div className='flex gap-2 items-center'>
+                                        <div>Start Recording</div> 
+                                        <FaMicrophoneAlt />
+                                    </div>
+                                 )}
+                        </button>
                         <div className="flex ">
                             <ReactMic
                                 className='w-[100%]'
@@ -96,14 +103,12 @@ const Form = () => {
                             />
                             
                         </div>
-                        { recordingURL &&
+                        {recordingURL &&
                          <div>
                          <h2>Recorded Audio</h2>
                          <audio src={recordingURL} controls="controls" />
                        </div>
-
                         }
-
                     </div>
                     <button type="submit" className='bg-slate-700 text-slate-400 p-2 rounded-md'>
                         Submit Details
@@ -120,10 +125,6 @@ const Form = () => {
                     <p><strong>Audio URL:</strong> {formDataSubmitted.get("AudioURL")}</p>
                 </div>
             )}
-
-           
-            
-            
         </div>
     );
 };
