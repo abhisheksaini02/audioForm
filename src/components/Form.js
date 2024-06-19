@@ -10,34 +10,59 @@ const Form = () => {
     const [recordingURL, setRecordingURL] = useState("");
     const [formDataSubmitted, setFormDataSubmitted] = useState(null);
 
+    // Function to start recording and handle AudioContext initialization
     const startRecordingHandler = () => {
-        // Ensure AudioContext is created or resumed on user gesture
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioContext = new AudioContext();
+        const handleAudioContext = () => {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioContext = new AudioContext();
 
-        setStartRecording(!startRecording);
+            // Proceed with recording setup
+            setStartRecording(true);
+            setTimeout(() => {
+                setStartRecording(false);
+            }, 10000); // Stop recording after 10 seconds
+        };
 
-        setTimeout(() => {
-            setStartRecording(false);
-        }, 10000); // Stop recording after 10 seconds
+        // Check if AudioContext is suspended and resume it on user gesture
+        if (suspendedAudioContext()) {
+            resumeAudioContext().then(handleAudioContext);
+        } else {
+            handleAudioContext();
+        }
     };
 
+    // Check if AudioContext is suspended
+    const suspendedAudioContext = () => {
+        return (suspendedAudioContext.audioContext.state === 'suspended');
+    };
+
+    // Resume AudioContext
+    const resumeAudioContext = () => {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioContext = new AudioContext();
+        return audioContext.resume();
+    };
+
+    // Handle recorded audio blob
     const handleAudio = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
         setRecordingURL(recordedBlob.blobURL);
     };
 
+    // Form submission handler
     const onSubmit = (data) => {
         if (recordingURL === "") {
             alert("Please record an audio file before submitting the form");
             return;
         }
 
+        // Prepare form data
         const formData = new FormData();
         formData.append("Name", data.Name);
         formData.append("Email", data.Email);
         formData.append("AudioURL", recordingURL);
 
+        // Reset form fields and local storage
         reset({
             Name: "",
             Email: "",
@@ -46,6 +71,7 @@ const Form = () => {
         localStorage.setItem("Email", data.Email);
         localStorage.setItem("AudioURL", recordingURL);
 
+        // Store form data for display
         setFormDataSubmitted(formData);
     };
 
@@ -79,8 +105,8 @@ const Form = () => {
                         {errors.Email && <span className="text-pink-900"> This field is required</span>}
                     </div>
                     <div className='flex flex-col gap-1'>
+                        {/* Start/Stop recording button */}
                         <label>Record Audio (Up to 10 seconds) <sup className="text-pink-900">*</sup></label>
-                        
                         <button type="button" onClick={startRecordingHandler} className='flex gap-2 items-center'>
                             {startRecording ? (
                                 <div className='flex gap-2 items-center'>
@@ -101,7 +127,6 @@ const Form = () => {
                                 className='w-[100%]'
                                 record={startRecording}
                                 onStop={handleAudio}
-                                visualSetting="sinewave"
                                 mimeType="audio/wav"
                             />
                         </div>
