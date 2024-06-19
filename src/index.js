@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+const renderWidget = (elementId) => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById(elementId)
+  );
+};
 
-
-ReactDOM.render(
-  <React.StrictMode>
-    
-    <App />
-    
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-reportWebVitals();
+// Expose the render function globally
+window.MyWidget = {
+  render: renderWidget
+};
