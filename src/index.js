@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 
 const renderWidget = (elementId) => {
-  ReactDOM(
+  const root = ReactDOM.createRoot(document.getElementById(elementId));
+  root.render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
-    document.getElementById(elementId)
+    </React.StrictMode>
   );
 };
 
