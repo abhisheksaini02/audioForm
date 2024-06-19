@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/audioForm/static/css/main.fcedcf25.css",
+    "main.js": "/audioForm/static/js/main.020b800a.js",
+    "index.html": "/audioForm/index.html",
+    "main.fcedcf25.css.map": "/audioForm/static/css/main.fcedcf25.css.map",
+    "main.020b800a.js.map": "/audioForm/static/js/main.020b800a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fcedcf25.css",
+    "static/js/main.020b800a.js"
+  ]
+}
