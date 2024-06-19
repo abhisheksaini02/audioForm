@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/audioForm/static/css/main.fcedcf25.css",
-    "main.js": "/audioForm/static/js/main.913554e9.js",
+    "main.js": "/audioForm/static/js/main.40766056.js",
     "index.html": "/audioForm/index.html",
     "main.fcedcf25.css.map": "/audioForm/static/css/main.fcedcf25.css.map",
-    "main.913554e9.js.map": "/audioForm/static/js/main.913554e9.js.map"
+    "main.40766056.js.map": "/audioForm/static/js/main.40766056.js.map"
   },
   "entrypoints": [
     "static/css/main.fcedcf25.css",
-    "static/js/main.913554e9.js"
+    "static/js/main.40766056.js"
   ]
 }
