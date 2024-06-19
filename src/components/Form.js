@@ -12,24 +12,27 @@ const Form = () => {
 
     // Function to start recording and handle AudioContext initialization
     const startRecordingHandler = () => {
-        const handleAudioContext = () => {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioContext = new AudioContext();
-
-            // Proceed with recording setup
-            setStartRecording(true);
-            setTimeout(() => {
-                setStartRecording(false);
-            }, 10000); // Stop recording after 10 seconds
+        // Ensure AudioContext is created or resumed on user gesture
+        const handleUserGesture = async () => {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const audioContext = new AudioContext();
+                await audioContext.resume(); // Resume or create AudioContext
+    
+                // Now proceed with starting or stopping recording
+                setStartRecording(!startRecording);
+    
+                setTimeout(() => {
+                    setStartRecording(false);
+                }, 10000); // Stop recording after 10 seconds
+            } catch (error) {
+                console.error('Failed to resume AudioContext:', error);
+            }
         };
-
-        // Check if AudioContext is suspended and resume it on user gesture
-        if (suspendedAudioContext()) {
-            resumeAudioContext().then(handleAudioContext);
-        } else {
-            handleAudioContext();
-        }
+    
+        handleUserGesture();
     };
+    
 
     // Check if AudioContext is suspended
     const suspendedAudioContext = () => {
