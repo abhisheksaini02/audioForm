@@ -10,9 +10,8 @@ const Form = () => {
     const [recordingURL, setRecordingURL] = useState("");
     const [formDataSubmitted, setFormDataSubmitted] = useState(null);
 
-    // Function to handle starting and stopping recording
     const startRecordingHandler = () => {
-        // Create or resume AudioContext within the user gesture handler
+        // Ensure AudioContext is created or resumed on user gesture
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const audioContext = new AudioContext();
 
@@ -23,13 +22,11 @@ const Form = () => {
         }, 10000); // Stop recording after 10 seconds
     };
 
-    // Function to handle recording completion
     const handleAudio = (recordedBlob) => {
         console.log('recordedBlob is: ', recordedBlob);
         setRecordingURL(recordedBlob.blobURL);
     };
 
-    // Function to handle form submission
     const onSubmit = (data) => {
         if (recordingURL === "") {
             alert("Please record an audio file before submitting the form");
@@ -41,7 +38,6 @@ const Form = () => {
         formData.append("Email", data.Email);
         formData.append("AudioURL", recordingURL);
 
-        // Store form data and recording URL in localStorage
         reset({
             Name: "",
             Email: "",
@@ -50,7 +46,7 @@ const Form = () => {
         localStorage.setItem("Email", data.Email);
         localStorage.setItem("AudioURL", recordingURL);
 
-        setFormDataSubmitted(formData); // Save form data for display
+        setFormDataSubmitted(formData);
     };
 
     return (
@@ -58,8 +54,30 @@ const Form = () => {
             <div className='flex justify-center items-center w-[50%] mt-20 mx-auto rounded-lg bg-slate-400'>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-full p-10 flex flex-col gap-3'>
                     {/* Input fields for Name and Email */}
-                    {/* ... Your existing code ... */}
-                    
+                    <div className='flex flex-col gap-1'>
+                        <label htmlFor='Name'> Name <sup className="text-pink-900">*</sup></label>
+                        <input
+                            className='pl-2 rounded-md'
+                            type="text"
+                            id="Name"
+                            name="Name"
+                            placeholder='Enter your Name'
+                            {...register("Name", { required: true })}
+                        />
+                        {errors.Name && <span className="text-pink-900"> This field is required</span>}
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label htmlFor='Email'> Email <sup className="text-pink-900">*</sup></label>
+                        <input
+                            className='pl-2 rounded-md'
+                            type="email"
+                            id="Email"
+                            name="Email"
+                            placeholder='Enter your Email id'
+                            {...register("Email", { required: true })}
+                        />
+                        {errors.Email && <span className="text-pink-900"> This field is required</span>}
+                    </div>
                     <div className='flex flex-col gap-1'>
                         <label>Record Audio (Up to 10 seconds) <sup className="text-pink-900">*</sup></label>
                         
