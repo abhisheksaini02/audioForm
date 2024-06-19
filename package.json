@@ -18,11 +18,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack --config webpack.config.js",
+    "build-widget": "react-scripts build && cp build/static/js/*.js dist/widget.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+     "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
