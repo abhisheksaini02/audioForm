@@ -8,6 +8,7 @@ module.exports = {
     filename: 'widget.js',
     library: 'MyWidget',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   module: {
     rules: [
@@ -33,6 +34,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      filename: 'index.html',
+      inject: 'body',
     }),
   ],
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
 };
