@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/audioForm/static/css/main.fcedcf25.css",
-    "main.js": "/audioForm/static/js/main.8b96bac5.js",
+    "main.css": "/audioForm/static/css/main.853eec8e.css",
+    "main.js": "/audioForm/static/js/main.c88b9856.js",
     "index.html": "/audioForm/index.html",
-    "main.fcedcf25.css.map": "/audioForm/static/css/main.fcedcf25.css.map",
-    "main.8b96bac5.js.map": "/audioForm/static/js/main.8b96bac5.js.map"
+    "main.853eec8e.css.map": "/audioForm/static/css/main.853eec8e.css.map",
+    "main.c88b9856.js.map": "/audioForm/static/js/main.c88b9856.js.map"
   },
   "entrypoints": [
-    "static/css/main.fcedcf25.css",
-    "static/js/main.8b96bac5.js"
+    "static/css/main.853eec8e.css",
+    "static/js/main.c88b9856.js"
   ]
 }
