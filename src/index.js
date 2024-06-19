@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 const renderWidget = (elementId) => {
-  ReactDOM.render(
+  ReactDOM(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
